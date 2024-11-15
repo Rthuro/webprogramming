@@ -18,11 +18,18 @@ $(document).ready(function(){
         viewProducts()
     })
 
+    $('#accounts-link').on('click', function(e){
+        e.preventDefault()
+        accounts()
+    })
+
     let url = window.location.href;
     if (url.endsWith('dashboard')){
         $('#dashboard-link').trigger('click')
     }else if (url.endsWith('products')){
         $('#products-link').trigger('click')
+    }else if (url.endsWith('accounts')){
+        $('#accounts-link').trigger('click')
     }else{
         $('#dashboard-link').trigger('click')
     }
@@ -191,5 +198,17 @@ $(document).ready(function(){
                 });
             }
         });
+    }
+
+    function accounts(){
+        $.ajax({
+            type: 'GET',
+            url: '../accounts/account_page.php',
+            dataType: 'html',
+            success: function(response){
+                $('.content-page').html(response)
+                
+            }
+        })
     }
 });
